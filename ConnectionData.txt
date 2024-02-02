@@ -2,7 +2,7 @@
 
 $servername = '127.0.0.1';
 $dbname = 'lacquerweb';
-$port = '33063';
+$port = '3306';
 $username = 'root';
 $password = 'cpsc332';
 
