@@ -1,0 +1,17 @@
+<?php
+
+$servername = '127.0.0.1';
+$dbname = 'lacquerweb';
+$port = '3306';
+$username = 'root';
+$password = 'cpsc332';
+
+//$servername = 'mariadb';
+//$dbname = 'uyvo8181';
+//$port = '3306';
+//$username = 'uyvo8181';
+//$password = 'goaf6viR';
+    if( empty(session_id()) && !headers_sent()){
+        session_start();
+    }
+?>
