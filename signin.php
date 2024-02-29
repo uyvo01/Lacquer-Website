@@ -1,19 +1,19 @@
+<?php
+    $menu="signin";
+    include "header.php";
+?>
 <head>
- <link rel="stylesheet" href="style.css">
- <title>Vietnamese Lacquer Art</title>
- <style>
- </style>
+    <meta name="google-signin-client_id" content="158007705898-ajs0q2l5uk5pfmen6jlbr7v2kke0s4lp.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
 </head>
 <body>
-    <?php
-    include "title.php";
-    include "menu1.php";
-    ?>
+
     <hr>
     <form action="login.php" method = "post">
         <h1>SIGN IN</h1>
         <?php if (isset($_GET['error'])) { ?>
-            <p class = "error"><h3><font color='Red'> <?php echo $_GET['error']; ?></font></h3> </p>
+            <p class = "error"><h3> <?php echo $_GET['error']; ?>!</h3> </p>
         <?php } ?>
         <table style="width:400px">
         <tr>
@@ -23,15 +23,34 @@
         <tr><td><label>Password</label></td><td><input type = "password" class="textbox"  name = "password" placeholder="Password"></td></tr>
         <tr><td></td><td><button type="submit" class="button" >Sign in</button> </td></tr>
         <tr><td></td><td>&nbsp;</td></tr>
-        <tr><td colspan="2" align="center"><label>Not register? <a href="signup.php">Create an account</a></label></td></tr>
+        <tr><td colspan="2" align="center"><label>Not registered? <a href="signup.php">Create an account</a></label></td></tr>
         </table>
+        <br />
+        <div class="container">
+            <div class="g-signin2" data-onsuccess="onSignIn" ></div>
+        </div>
     </form>
-    
-    <table style="height:400px">
-    <tr style="border: none;">
-    <td style="border: none;"></td>
-    </tr>
-    </table>
+</body>
+<script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+
+</script>
 <?php
     include "footer.php";
 ?>

@@ -1,12 +1,13 @@
-<head>
- <link rel="stylesheet" href="style.css">
- <title>Vietnamese Lacquer Art</title>
-</head>
- <body>
+
 <?php
-    include "title.php";
-    include "menu1.php";
+    if( empty(session_id()) && !headers_sent()){
+        session_start();
+    }
+    $_SESSION['email']="";
+    $_SESSION['member_name']="";
+    $_SESSION['member_id']="";
+    $_SESSION['usertype']="";
+    $menu="home";
+    header("Location: home.php");
 ?>
-    
-</body>
 
