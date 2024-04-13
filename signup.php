@@ -114,8 +114,8 @@ function change_type(value) {
         <td></td><td></td>
     </tr>
     <tr>
-    <td></td><td><input type='submit' class='button' value='Sign up' onclick='verifyPassword()'>
-    <input type='reset' class='button' value='Reset'></td> <td></td><td></td>
+    <td></td><td><button type='submit' class='button' value='Sign up' onclick='verifyPassword()'>Submit</button>
+    <button type='reset' class='button' value='Reset'>Reset</button></td> <td></td><td></td>
     </tr>
 </table>
 </form>

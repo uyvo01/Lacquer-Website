@@ -1,9 +1,7 @@
 
 header {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
+  position: sticky;
+  top: 0;
 }
 body {
   font-family: Arial, sans-serif;
@@ -21,14 +19,19 @@ h1 {
   color:black;
   text-align: center;
   padding-top: 10px;
+  
 }
 .hw {
   font-size: 36px;
   color:white;
-
-
-
 }
+.hr {
+  font-size: 36px;
+  color:red;
+  text-align: center;
+  padding-top: 10px;
+}
+
 .title {
   font-size: 36px;
   background-color: darkred;
@@ -66,12 +69,11 @@ h4 {
   padding: 10px 0;
 }
 h5 {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: normal;
   color:black;
   text-align: center;
-  padding:0px 0px;
-  margin: 10px;
+  margin: 5px;
 }
 .info {
   font-size: 14px;
@@ -99,7 +101,7 @@ h5 {
 }
 label {
   font-size: 14px;
-  color:white;
+  color:black;
 }
 .menu {
   padding: 10px 0;
@@ -108,8 +110,9 @@ label {
   background-color: darkred;
   color:white;
   font-weight: bold;
-  text-align:  left;
+  text-align:  center;
 }
+
 
 .container {
   display: flex;
@@ -125,32 +128,33 @@ label {
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.box_image {
-  position: absolute;
-  display: block;
-  width: 50%;
-  height: 0px;
+.box-image {
+  max-width:30%;
+  min-width:450px;
+  min-height:450px;
   text-align: center;
   align-items: center;
+  border-style:hidden;
+  border-color: red;
+  padding-left: 15px;
+  padding-right: 20px;
 }
-.box_image:hover {
-  display:block;
+.box-image:hover {
   padding: 10px;
-  transform: translateY(-10px);
-  opacity: 1;
+  transform: scale(1.05);
 
 }
-img{
+.list{
   display:block;
-  padding: 10px;
-  width:95%
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
 }
-img:hover{
-  display:block;
-  padding: 10px;
-  transform: translateY(-10px);
-  opacity: 0.5;
+.list:hover{
+  transform: scale(1.02);
+  opacity: 50%;
 }
+
 ul {
   list-style-position: inside;
   padding: 10px 0;
@@ -170,23 +174,41 @@ a{
   text-decoration: none;
   padding-left: 10px;
   padding-right: 10px;
-}
+  padding-top: 10px;
+  padding-bottom:10px;
 
-a:hover{
   
-  background-color: #3365e5;
-  padding: 5px;
+}
+a.icon {
+  color: black;
+  font-weight:normal ;
+  text-decoration: none;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  
+}
+a.icon:hover {
+  background-color: inherit;
+  padding-left: 0px;
+  padding-right: 0px;
+  text-decoration: none;
+  transform: translateY(0);
+  animation-duration:2s;
+  animation-name: none;
+}
+a:hover{ 
+  background-color: orange;
   padding-left: 10px;
   padding-right: 10px;
   text-decoration: none;
-  animation-duration:2s;
-  transform: translateY(1px);
-  animation-name: changecolor;
-  transition: background 1s;
+  transform: translateY(2px);
+
 }
 @keyframes changecolor {
   from {
-    background-color: #3365e5;
+    background-color: darkred
   }
   to { background-color: orange;
 
@@ -198,24 +220,26 @@ form{
   background-color: darkred;
   padding: 20px;
 }
-
+form.normal{
+  background-color: bisque;
+}
 button {
   background-color: orange;
   border: none;
   color: white;
-  padding: 10px 5px;
+  padding: 8px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 14px;
+  font-size: 16px;
   margin: 1px;
   cursor: pointer;
   align-items: center;
-  width: 100px;
+  width: 80px;
 
 }
 button:hover {
-    background-color: #45b7e5;
+    background-color: darkred;
     transition: background 0s;
     animation-duration: 1s;
     transform: translateY(2px);
@@ -228,9 +252,40 @@ input{
 .footer {
   padding-top: 10px;
   position:fixed;
-  bottom: 0;
+  bottom:0;
   width: 100%;
   background-color: darkred;
   color: #fff;
   text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  font-family: Tahoma, Geneva, sans-serif;
+  border: 1px solid;
+  width:95%;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+table td {
+  padding: 7px;
+}
+table thead td {
+  background-color: #e1dddd;
+  color:darkred;
+  font-weight: bold;
+  font-size: 13px;
+  border: 1px solid #54585d;
+  text-align: center;
+}
+table tbody td {
+  color: #636363;
+  border: 1px solid #dddfe1;
+}
+table tbody tr {
+  background-color: #ffffff;
+}
+table tbody tr:nth-child(even) {
+  background-color: #FEF9E7;
 }

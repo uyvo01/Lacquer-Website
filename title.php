@@ -1,8 +1,19 @@
-<head>
- <link rel="stylesheet" href="style.css">
- <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
- <title>Vietnamese Lacquer Art</title>
-</head>
-
+<?php
+if( empty(session_id()) && !headers_sent()){
+        session_start();
+    }
+    include "ConnectionData.txt";
+    $conn=mysqli_connect($servername,$username,$password);
+    if (!$conn)
+    {
+        die('Could not connect: '.$mysqli_error());
+    }
+    mysqli_select_db($conn,$dbname) or die("Unable to select database $dbname");
+?>
 <div class="title">Vietnamese Lacquer Art</div>
-<div class="slogan">Authentic & Original Vietnamese Artworks & Paintings</div>
+    <div class="container" style = "background-color: darkred; margin-right: 0px;">
+        <img src ="images/gbr.svg" width="40px" height="40px" style = "background-color: darkred; padding-left:10px; padding-right:10px" /> 
+        <img src ="images/vnm.svg" width="40px" height="40px" style = "background-color: darkred; padding-left:10px; padding-right:10px"/>
+    </div>
+</div>
+

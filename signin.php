@@ -22,12 +22,12 @@
         </tr>
         <tr><td><label>Password</label></td><td><input type = "password" class="textbox"  name = "password" placeholder="Password"></td></tr>
         <tr><td></td><td><button type="submit" class="button" >Sign in</button> </td></tr>
-        <tr><td></td><td>&nbsp;</td></tr>
-        <tr><td colspan="2" align="center"><label>Not registered? <a href="signup.php">Create an account</a></label></td></tr>
+        
         </table>
         <br />
         <div class="container">
-            <div class="g-signin2" data-onsuccess="onSignIn" ></div>
+            <div class="g-signin" data-onsuccess="onSignIn" ></div>
+            <a style='background:#F39C12; padding:5px' href="signup.php">Create an account</a>
         </div>
     </form>
 </body>

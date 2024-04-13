@@ -1,15 +1,15 @@
 <?php
 
-    if( empty(session_id()) && !headers_sent()){
-        session_start();
-    }
-    include "ConnectionData.txt";
-    $conn=mysqli_connect($servername,$username,$password);
-    if (!$conn)
-    {
-        die('Could not connect: '.$mysqli_error());
-    }
-    mysqli_select_db($conn,$dbname) or die("Unable to select database $dbname");
+if( empty(session_id()) && !headers_sent()){
+    session_start();
+}
+include "ConnectionData.txt";
+$conn=mysqli_connect($servername,$username,$password);
+if (!$conn)
+{
+    die('Could not connect: '.$mysqli_error());
+}
+mysqli_select_db($conn,$dbname) or die("Unable to select database $dbname");
     if(isset($_POST['username']) && isset($_POST['password'])){
         function validate($data) {
             $data = trim($data);
