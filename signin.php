@@ -4,7 +4,7 @@
 ?>
 <head>
     <meta name="google-signin-client_id" content="158007705898-ajs0q2l5uk5pfmen6jlbr7v2kke0s4lp.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton_hidden" async defer></script>
 
 </head>
 <body>

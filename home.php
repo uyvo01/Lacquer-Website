@@ -15,7 +15,7 @@
         $result=mysqli_query($conn,$sql);
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH)) { 
             echo "<div class='box-image'>";
-            echo "<img class='list' src='images/$row[product_img]' width='80%' height='75%'>";
+            echo "<a class='icon' href='shopping.php?func=view&product_no=$row[product_no]'><img class='list' src='images/$row[product_img]'></a>";
             echo "<h5>$row[product_artist]</h5>";
             echo "<h5>Size: $row[product_size_height]cm*$row[product_size_width]cm | $row[size_height_inches] inches*$row[size_width_inches] inches</h5>";
             echo "<h5>Material: $row[product_material]</h5>";

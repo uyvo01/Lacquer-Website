@@ -26,9 +26,9 @@
             echo "<a  href='product.php?func=list_product'>Product</a>";
         }
         if ($menu== 'policy'){
-            echo "<a style='background:#F39C12;' href='policy.php'>Sale Policy</a>";
+            echo "<a style='background:#F39C12;' href='policy.php?func=list_policy'>Sale Policy</a>";
         }else{
-            echo "<a  href='policy.php'>Sale Policy</a>";
+            echo "<a  href='policy.php?func=list_policy'>Sale Policy</a>";
         }
         echo "<span style='float:right;'>";
         echo $_SESSION["member_name"];
