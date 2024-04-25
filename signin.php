@@ -25,9 +25,8 @@
         
         </table>
         <br />
-        <div class="container">
-            <div class="g-signin" data-onsuccess="onSignIn" ></div>
-            <a style='background:#F39C12; padding:5px' href="signup.php">Create an account</a>
+        <div class="container">   
+            <h4 style='margin:0px;'> Not registered? <a style='border-radius:8px; background:orange;' href="signup.php" >Create an account</a></h4>
         </div>
     </form>
 </body>

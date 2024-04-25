@@ -2,7 +2,7 @@
     $menu="home";
     include "header.php"; 
 ?>
-<body>
+
     <div class="hb">PAINTINGS OF THE MONTH </div>
     <hr />
     <div class="container">
@@ -24,8 +24,6 @@
         }
         ?>
     </div>
-
-</body>
 
 <?php
     include "footer.php";

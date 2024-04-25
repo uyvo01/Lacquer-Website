@@ -32,8 +32,8 @@ if ($func=='new_product'){
         <tr>
             <td style='text-align:right'><label>Size(H*W)*</label></td>
             <td style='text-align:left'>
-                <input type='text' class='textbox' style = "width: 60px" id='size_height' name='size_height' value=''> cm
-                <input type='text' class='textbox' style = "width: 60px"  id='size_width' name='size_width' value=''> cm
+                <input type='text' class='textbox' style = "width: 60px" id='size_height' name='size_height' value=''> <label>cm</label>
+                <input type='text' class='textbox' style = "width: 60px"  id='size_width' name='size_width' value=''><label>cm</label>
             </td>
             <td style='text-align:right'><label>Material*</label></td>
             <td style='text-align:left'><input type='text' style = "width: 100%" required='required' class='textbox' id='material' name='material' value=''></td>
@@ -71,8 +71,10 @@ if ($func=='new_product'){
             <td colspan='3' style='text-align:left'><input type='text' style = "width: 100%; text-align:right" required='required' class='textbox' id='product_delivery' name='product_delivery' value=''></td>
         </tr>
         <tr>
+            <td style='text-align:right'><label>Price($)*</label></td>
+            <td style='text-align:right'><input type='text' style = "width: 100%; text-align:right" required='required' class='textbox' id='product_price' name='product_price' value=''></td>
             <td style='text-align:right'><label>Description</label></td>
-            <td colspan='3' style='text-align:left'><textarea rows="4" style = "width: 100%" class='textbox' id='product_description' name='product_description' value=''></textarea></td>
+            <td style='text-align:left'><textarea rows="4" style = "width: 100%" class='textbox' id='product_description' name='product_description' value=''></textarea></td>
         </tr>
         <tr>
             <td style='text-align:right'><label>Image*</label></td>
@@ -83,8 +85,8 @@ if ($func=='new_product'){
             <td colspan='3'style='text-align:left'><label>(*): mandatory<label></td>
         </tr>
         <tr>
-            <td></td><td colspan='3'><input type='submit' class='button' value='submit' name='submit'>
-            <input type='reset' class='button' value='Reset'></td>         
+            <td></td><td colspan='3'><button type='submit' class='button' value='submit' name='submit'>Submit
+            <button type='reset' class='button' value='Reset'>Reset</td>         
         </tr>
     </table>
     </form>
@@ -154,6 +156,10 @@ if ($func=='new_product'){
     $member_id = $_SESSION['member_id'];
     $ship_code = validate($_POST['ship_code']);
     $return_code = validate($_POST['return_code']);
+    $product_status = validate($_POST['product_status']);
+    $product_delivery = validate($_POST['product_delivery']);
+    $product_price = validate($_POST['product_price']);
+    $product_description = validate($_POST['product_description']);
 
     $sql="select product_name from products where product_name = '".$product_name."'";
     $result=mysqli_query($conn,$sql);
@@ -164,9 +170,11 @@ if ($func=='new_product'){
         exit();
     }
     // insert to table products
-    $sql= " insert into products(product_name, product_artist, product_size_height, product_size_width, product_material, product_img, member_id, ship_code, return_code) 
+    $sql= " insert into products(product_name, product_artist, product_size_height, product_size_width, product_material, product_img, member_id, 
+                    ship_code, return_code, product_status, product_delivery, product_price, product_description) 
             values('".$product_name."','".$product_artist. "',".$product_size_height. ",".$product_size_width. ",
-                    '".$product_material. "', '".$product_img. "', '".$member_id. "', '".$ship_code. "', '".$return_code. "')";
+                    '".$product_material. "', '".$product_img. "', '".$member_id. "', '".$ship_code. "', '".$return_code. "',
+                    '".$product_status."', '".$product_delivery."', ".$product_price. ",'".$product_description."')";
 
     $result = mysqli_query($conn,$sql);
     header("Location: product.php?func=list_product&error=Add successfully!");
@@ -188,14 +196,22 @@ if ($func=='new_product'){
             <td>Material</td>
             <td>Day Delivery</td>
             <td>Description</td>
+            <td>Price</td>
             <td>Image</td>
             </thead>";
-    $sql="  select p.product_no, p.product_name, p.product_artist, p.product_size_height, round(p.product_size_height/2.54,1) as size_height_inches
-            , p.product_size_width, round(p.product_size_width/2.54,1) as size_width_inches 
-            , p.product_material, p.product_img, p.product_status, p.product_delivery, p.product_description
-            from products p 
-            where p.member_id = '".$_SESSION['member_id']."'";
-
+    if ($_SESSION["usertype"]=="A"){ //Admin view
+        $sql="  select p.product_no, p.product_name, p.product_artist, p.product_size_height, round(p.product_size_height/2.54,1) as size_height_inches
+                , p.product_size_width, round(p.product_size_width/2.54,1) as size_width_inches 
+                , p.product_material, p.product_img, p.product_status, p.product_delivery, p.product_description, p.product_price, p.member_id
+                from products p
+                where 1=1 order by 1";
+    }else{ // Seller view
+        $sql="  select p.product_no, p.product_name, p.product_artist, p.product_size_height, round(p.product_size_height/2.54,1) as size_height_inches
+                , p.product_size_width, round(p.product_size_width/2.54,1) as size_width_inches 
+                , p.product_material, p.product_img, p.product_status, p.product_delivery, p.product_description, p.product_price, p.member_id
+                from products p 
+                where p.member_id = '".$_SESSION['member_id']."'";
+    }
     $result=mysqli_query($conn,$sql);
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH)) { 
         echo "<tr>";
@@ -207,6 +223,7 @@ if ($func=='new_product'){
         echo "<td>$row[product_material]</td>";
         echo "<td style='text-align:right'>$row[product_delivery]</td>";
         echo "<td>$row[product_description]</td>";
+        echo "<td style='text-align: right'>$row[product_price]</td>";
         echo "<td width='100px'><img src='images/$row[product_img]' width='100%' height='100%'></td>";
         echo "</tr>";
     }
@@ -217,7 +234,7 @@ if ($func=='new_product'){
     $product_no = $_GET['product_no'];
     $sql="  select p.product_no, p.product_name, p.product_artist, p.product_size_height, round(p.product_size_height/2.54,2) as size_height_inches
             , p.product_size_width, round(p.product_size_width/2.54,2) as size_width_inches 
-            , p.product_material, p.product_img, p.product_status, p.product_delivery, p.product_description, p.ship_code, p.return_code
+            , p.product_material, p.product_img, p.product_status, p.product_delivery, p.product_price, p.product_description, p.ship_code, p.return_code
             from products p 
             where p.product_no = '".$product_no."'";
         
@@ -288,11 +305,13 @@ if ($func=='new_product'){
                     <option value='Inactive' <?php if ($row['product_status']=='Inactive'){ echo 'selected'; } ?>>Inactive</option>
                 </select>
                 <td style='text-align:right'><label>Day delivery*</label></td>
-                <td style='text-align:left'><input type='text' style = "width: 100%; text-align:right" required='required' class='textbox' id='product_delivery' name='product_delivery' value='<?php echo $row['product_delivery']?>'></td>
+                <td style='text-align:left'><input type='text' style = "width: 100%; text-align:right" required='required' class='textbox' id='product_delivery' name='product_delivery' value='<?php echo $row['product_delivery']; ?>'></td>
             </tr>
             <tr>
+                <td style='text-align:right'><label>Price($)*</label></td>
+                <td style='text-align:left'><input type='text' style = "width: 100%; text-align:right" required='required' class='textbox' id='product_price' name='product_price' value='<?php echo $row['product_price']; ?>'></td>
                 <td style='text-align:right'><label>Description</label></td>
-                <td colspan='3' style='text-align:left'><textarea rows="4" style = "width: 100%" class='textbox' id='product_description' name='product_description' value='<?php echo $row['product_description']?>'></textarea></td>
+                <td style='text-align:left'><textarea rows="4" style = "width: 100%" class='textbox' id='product_description' name='product_description' value='<?php echo $row['product_description']; ?>'><?php echo $row['product_description']; ?></textarea></td>
             </tr>
             <tr>
                 <td></td>
@@ -321,12 +340,13 @@ if ($func=='new_product'){
     $product_delivery = validate($_POST['product_delivery']);
     $ship_code = validate($_POST['ship_code']);
     $return_code = validate($_POST['return_code']);
+    $product_price = validate($_POST['product_price']);
     
     $sql= " update products set product_name = '".$product_name."', product_artist = '".$product_artist."', 
             product_size_height = ".$product_size_height.", product_size_width = ".$product_size_width.", 
             product_material = '".$product_material."', product_status = '".$product_status."',  
             product_description = '".$product_description."', product_delivery = ".$product_delivery.",
-            ship_code = '".$ship_code."', return_code = '".$return_code."' 
+            ship_code = '".$ship_code."', return_code = '".$return_code."',  product_price = ".$product_price." 
             where product_no = '".$product_no. "'";
     $result = mysqli_query($conn,$sql);
     header("Location: product.php?func=message&content=Update successfully!");

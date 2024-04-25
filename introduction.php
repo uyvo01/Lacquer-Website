@@ -5,7 +5,7 @@
 <body>
     <div class="hb">The Process Of Making Lacquer Paintings in Vietnam Fine Art </div>
     <hr />
-    <h5>POSTED ON OCTOBER 21, 2019 BY STEPHEN</h5>
+    <h5  style="text-align: center;">POSTED ON OCTOBER 21, 2019 BY STEPHEN</h5>
     <div class="container_vertical" style='background-color:bisque;width:90%; height:90%; margin-left:auto; margin-right:auto'>
         <div class="htext">Vietnamese art reflects a mixture of influences: 
             Vietnamese traditional art, influences from China and influence from the French during the colonial period. 
