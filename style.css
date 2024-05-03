@@ -221,7 +221,7 @@ label {
   max-width: 70%;
   max-height: 100%;
 }
-.container_cart{
+.container_horizon{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -362,7 +362,6 @@ button {
   background-color: orange;
   border: none;
   color: white;
-
   padding: 8px;
   text-align: center;
   text-decoration: none;
@@ -382,6 +381,28 @@ button:hover {
     transform: translateY(1px);
 
 }
+.go {
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 1px;
+  cursor: pointer;
+  align-items: center;
+  width:fit-content;
+  border-radius: 0px;
+
+}
+
+.go:hover {
+  background-color: orange;
+  transform: none;
+  opacity: 50%;
+  transition: opacity .25s ease-in-out;
+
+}
+
 input{
   height: 22pt;
 }
@@ -474,6 +495,8 @@ span {cursor:pointer; }
   opacity: 0.8;
   min-width: 114px;
   margin-top: 10px;
+  width:180px;
+  text-align:left;
 }
 
 /* Links inside the dropdown */

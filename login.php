@@ -41,7 +41,7 @@ mysqli_select_db($conn,$dbname) or die("Unable to select database $dbname");
         $_SESSION['usertype']=$row['usertype'];
         header("Location: home.php");
     }else{
-        header("Location: signin.php?error=Incorrect User Name or Password");
+        header("Location: signin.php?error=Incorrect User Name or Password!");
         exit();
     }
 ?>

@@ -20,21 +20,24 @@ if ($func=='add_cart'){
     $product_quantity = validate($_POST['product_quantity']);
     $member_id = $_SESSION['member_id'];
 
-
-    $sql="select product_no from carts where product_no = '".$product_no."' and member_id ='".$member_id."'";
-    $result=mysqli_query($conn,$sql);
-    $num = mysqli_num_rows($result);
-
-    if($num>0){
-        $sql = "update carts set product_quantity = product_quantity + ".$product_quantity. " 
-            where product_no = '".$product_no."' and member_id ='".$member_id."'";
+    if(empty($_SESSION['member_id'])){
+        header("Location: signin.php?error=Please sign in first!");
     }else{
-    // insert to table carts
-        $sql= " insert into carts(member_id, product_no, product_quantity) 
-                values('".$member_id."','".$product_no. "',$product_quantity)";
+        $sql="select product_no from carts where product_no = '".$product_no."' and member_id ='".$member_id."'";
+        $result=mysqli_query($conn,$sql);
+        $num = mysqli_num_rows($result);
+
+        if($num>0){
+            $sql = "update carts set product_quantity = product_quantity + ".$product_quantity. " 
+                where product_no = '".$product_no."' and member_id ='".$member_id."'";
+        }else{
+        // insert to table carts
+            $sql= " insert into carts(member_id, product_no, product_quantity) 
+                    values('".$member_id."','".$product_no. "',$product_quantity)";
+        }
+        $result = mysqli_query($conn,$sql);
+        header("Location: shopping.php?func=update_cart&message=Add to cart successfully!");
     }
-    $result = mysqli_query($conn,$sql);
-    header("Location: shopping.php?func=update_cart&message=Add to cart successfully!");
     //------------------END ADD CART----------------------
     
 //-----------------------BEGIN THE FEATURE LIST PAINTINGS---------------------
@@ -43,8 +46,8 @@ if ($func=='add_cart'){
     echo "<div class = 'hb'>$_GET[message]</div>";
     echo "<br />";
     echo "<div class='container' style = 'width: 300px; margin-left:auto; margin-right:auto'>";
-    echo "<a style='padding:0px' href='home.php'><button>Continue shopping</button></a>";
-    echo "<a style='padding:0px' href='cart.php?func=checkout'><button>Checkout</button></a>";
+    echo "<a class = 'icon' style='padding:0px' href='home.php'><button>Continue shopping</button></a>";
+    echo "<a class = 'icon' style='padding:0px' href='cart.php?func=checkout'><button>Checkout</button></a>";
     echo "</div>";
 
 //-------------------Begin function edit product------------------------
@@ -54,7 +57,7 @@ if ($func=='add_cart'){
             , p.product_size_width, round(p.product_size_width/2.54,2) as size_width_inches 
             , p.product_material, p.product_img, p.product_status, p.product_description 
             , DATE_FORMAT(DATE_ADD(CURDATE(),INTERVAL p.product_delivery DAY),'%a, %M %D, %Y') as delivery
-            , s.policy_description as ship_description, r.policy_description as return_description
+            , s.policy_description as ship_description, r.policy_description as return_description, p.product_price
             from products p, sale_policy s, sale_policy r 
             where p.ship_code = s.policy_code and p.return_code = r.policy_code and p.product_no = '".$product_no."'";
     $result = mysqli_query($conn,$sql);
@@ -84,6 +87,17 @@ if ($func=='add_cart'){
                         <td style="border:0px;"><div class="hb15">SIZE:</div></td>
                         <td style="border:0px;"><h5><?php echo "$row[product_size_height]cm*$row[product_size_width]cm | $row[size_height_inches] inches*$row[size_width_inches] inches" ?></h5></td>  
                     </tr>
+                    <?php if ($_SESSION['member_id']!=""){ ?>
+                        <tr>
+                        <td style='border:0px;'><div class='hb15'>PRICE:</div></td>
+                        <td style='border:0px;'><h5>$<?php echo number_format($row["product_price"],2) ?></h5></td>
+                        </tr>
+                    <?php } else{ ?>
+                        <tr>
+                        <td style='border:0px;'><div class='hb15'>PRICE:</div></td>
+                        <td style='border:0px;'><h5>Shown after signing in.</h5></td>
+                        </tr>
+                    <?php } ?>
                 </table>
                 <br />
                 <div class="line-1"></div>
@@ -113,7 +127,7 @@ if ($func=='add_cart'){
         <h5><?php echo $row['product_description']?></h5>
         <br />
         
-        <div class="container_detail" style='background-color:bisque;'>
+        <div class="container_detail" style='background-color:bisque;width:100%'>
             <div class="hb30" style="text-align:center">OTHER ARTWORKS BY ARTIST <?php echo $row['product_artist']?></div>
             <?php
                 $sql="  select p.product_no, p.product_name, p.product_artist,  p.product_size_height

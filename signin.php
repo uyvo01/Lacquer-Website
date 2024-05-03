@@ -10,11 +10,12 @@
 <body>
 
     <hr>
+    <?php if (isset($_GET['error'])) { ?>
+            <div class="hb20" style="text-align: center; margin-bottom:25px"> <?php echo $_GET['error']; ?></div>
+    <?php } ?>
     <form action="login.php" method = "post">
         <h1>SIGN IN</h1>
-        <?php if (isset($_GET['error'])) { ?>
-            <p class = "error"><h3> <?php echo $_GET['error']; ?>!</h3> </p>
-        <?php } ?>
+        
         <table style="width:400px">
         <tr>
         <td><label> User Name </label></td>

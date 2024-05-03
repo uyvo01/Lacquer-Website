@@ -76,7 +76,7 @@ if ($func=='checkout'){
                             }
                             
                         ?>
-                            <div class="container_cart" style="width: 100%; padding-left:20px;margin-left:auto;margin-right:auto;margin-top:20px;">
+                            <div class="container_horizon" style="width: 100%; padding-left:20px;margin-left:auto;margin-right:auto;margin-top:20px;">
                                 
                                 <input type='checkbox' id='<?php echo $itemtotal;?>' value='<?php echo $row["product_no"]?>' name=products[] <?php if($row["place_order"]==1){ echo 'checked';} ?> onclick='return update_cart(this.id);'>
                                 <img src='images/<?php echo $row['product_img']?>' style="width:30%; height:auto;margin-left:20px;margin-right:auto;">
@@ -138,7 +138,7 @@ if ($func=='checkout'){
                         $subtotal=0;
                         while($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
                         ?>
-                            <div class="container_cart" style="width: 100%; padding-left:5px;margin-left:auto;margin-right:auto;">
+                            <div class="container_horizon" style="width: 100%; padding-left:5px;margin-left:auto;margin-right:auto;">
                                 
                                 <img src='images/<?php echo $row['product_img']?>' style="width:45%; height:auto;margin-left:5px;margin-right:auto;">
 
@@ -251,7 +251,7 @@ if ($func=='checkout'){
                         $subtotal= $subtotal + $itemtotal
                          
                     ?>
-                        <div class="container_cart" style="width: 100%; padding-left:20px;margin-left:auto;margin-right:auto;margin-top:20px;">
+                        <div class="container_horizon" style="width: 100%; padding-left:20px;margin-left:auto;margin-right:auto;margin-top:20px;">
                             
                             <img src='images/<?php echo $row['product_img']?>' style="width:30%; height:auto;margin-left:20px;margin-right:auto;">
                             <div class="container_vertical" style = 'width:60%;'>
@@ -334,7 +334,7 @@ if ($func=='checkout'){
                     $subtotal=0;
                     while($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
                     ?>
-                        <div class="container_cart" style="width: 100%; padding-left:5px;margin-left:auto;margin-right:auto;">
+                        <div class="container_horizon" style="width: 100%; padding-left:5px;margin-left:auto;margin-right:auto;">
                             
                             <img src='images/<?php echo $row['product_img']?>' style="width:45%; height:auto;margin-left:5px;margin-right:auto;">
 

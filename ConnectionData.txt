@@ -14,4 +14,5 @@ $password = 'cpsc332';
     if( empty(session_id()) && !headers_sent()){
         session_start();
     }
+    date_default_timezone_set('America/Los_Angeles');
 ?>

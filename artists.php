@@ -1,27 +1,24 @@
 <?php
-    $menu="home";
+    $menu="artists";
     include "header.php"; 
-    if (isset($_POST['txtsearch'])) {
-        $textsearch=$_POST['txtsearch'];
+    if (isset($_GET['search'])) {
+        $search=$_GET['search'];
         
     }else{
-        $textsearch="";
+        $search="";
     }
 
-    $search=strtolower($textsearch);
-
-    if ($search!=""){
+    $search=strtolower($search);
+    $artist=strtoupper($search);
+    if (!empty($_GET['search'])){
         $sql="  select p.product_no, p.product_name, p.product_artist,  p.product_size_height
         , round(p.product_size_height/2.54,1) as size_height_inches
         , p.product_size_width, round(p.product_size_width/2.54,1) as size_width_inches 
         , p.product_material, p.product_img
         from products p 
-        where product_status='Active' and (lower(p.product_artist) like '%".$search."%'
-                or lower(p.product_name) like '%".$search."%' or CONVERT(p.product_size_height,nchar) like '%".$search."%'
-                or CONVERT(round(p.product_size_height/2.54,1),nchar) like '%".$search."%' or CONVERT(p.product_size_width,nchar) like '%".$search."%' 
-                or CONVERT(round(p.product_size_width/2.54,1),nchar) like '%".$search."%' or p.product_material like '%".$search."%' )";
-                $result=mysqli_query($conn,$sql);
-        echo "<div class='hb'>SEARCH RESULT FOR '$textsearch' </div>";
+        where product_status='Active' and (lower(p.product_artist) like '%".$search."%')";
+        $result=mysqli_query($conn,$sql);
+        echo "<div class='hb'>ARTISTS: $artist </div>";
         
     }else{
         $sql="  select p.product_no, p.product_name, p.product_artist,  p.product_size_height
