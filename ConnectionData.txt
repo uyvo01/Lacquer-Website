@@ -6,13 +6,17 @@ $port = '3306';
 $username = 'root';
 $password = 'cpsc332';
 
+//$servername = 'sql108.infinityfree.com';
+//$dbname = 'if0_36481970_lacquer';
+//$port = '3306';
+//$username = 'if0_36481970';
+//$password = 'Thanhuy123';
+
 //$servername = 'mariadb';
 //$dbname = 'uyvo8181';
 //$port = '3306';
 //$username = 'uyvo8181';
 //$password = 'goaf6viR';
-    if( empty(session_id()) && !headers_sent()){
-        session_start();
-    }
-    date_default_timezone_set('America/Los_Angeles');
+date_default_timezone_set('America/Los_Angeles');
+
 ?>

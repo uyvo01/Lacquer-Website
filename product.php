@@ -1,6 +1,10 @@
 <?php
+
 $menu="product";
 include "header.php"; 
+if($_SESSION["usertype"]<>"A" && $_SESSION["usertype"]<>"S"){
+    header('location: home.php');
+}
 if (isset($_GET['func'])) {
     $func=$_GET['func'];
     function validate($data) {

@@ -126,30 +126,31 @@ if ($func=='add_cart'){
         <div class = "hb15">DESCRIPTION</div>
         <h5><?php echo $row['product_description']?></h5>
         <br />
-        
-        <div class="container_detail" style='background-color:bisque;width:100%'>
-            <div class="hb30" style="text-align:center">OTHER ARTWORKS BY ARTIST <?php echo $row['product_artist']?></div>
-            <?php
-                $sql="  select p.product_no, p.product_name, p.product_artist,  p.product_size_height
-                , round(p.product_size_height/2.54,1) as size_height_inches
-                , p.product_size_width, round(p.product_size_width/2.54,1) as size_width_inches 
-                , p.product_material, p.product_img
-                from products p where product_status='Active' and p.product_artist='".$artist."' and p.product_no!='".$product_no."'";
-                $result=mysqli_query($conn,$sql);
-                while($row = mysqli_fetch_array($result, MYSQLI_BOTH)) { 
-                    echo "<div class='box-image'>";
-                    echo "<a class='icon' href='shopping.php?func=view&product_no=$row[product_no]'><img class='list' src='images/$row[product_img]'></a>";
-                    echo "<h5>$row[product_artist]</h5>";
-                    echo "<h5>Size: $row[product_size_height]cm*$row[product_size_width]cm | $row[size_height_inches] inches*$row[size_width_inches] inches</h5>";
-                    echo "<h5>Material: $row[product_material]</h5>";
-                    echo "<h5>$row[product_name]</h5>";
-                    echo "</div>";
-                }
-            ?>
-        </div>
     </div>
+    <div class="container_vertical" style='background-color:bisque;width:70%'>
+        <div class="hb30" style="text-align:center;margin-left:auto;margin-right:auto;">OTHER ARTWORKS BY ARTIST <?php echo $row['product_artist']?></div>
+        <?php
+            $sql="  select p.product_no, p.product_name, p.product_artist,  p.product_size_height
+            , round(p.product_size_height/2.54,1) as size_height_inches
+            , p.product_size_width, round(p.product_size_width/2.54,1) as size_width_inches 
+            , p.product_material, p.product_img
+            from products p where product_status='Active' and p.product_artist='".$artist."' and p.product_no!='".$product_no."'";
+            $result=mysqli_query($conn,$sql);
+            while($row = mysqli_fetch_array($result, MYSQLI_BOTH)) { 
+                echo "<div class='box-image'>";
+                echo "<a class='icon' href='shopping.php?func=view&product_no=$row[product_no]'><img class='list' src='images/$row[product_img]'></a>";
+                echo "<h5>$row[product_artist]</h5>";
+                echo "<h5>Size: $row[product_size_height]cm*$row[product_size_width]cm | $row[size_height_inches] inches*$row[size_width_inches] inches</h5>";
+                echo "<h5>Material: $row[product_material]</h5>";
+                echo "<h5>$row[product_name]</h5>";
+                echo "</div>";
+            }
+        ?>
 
-            
+    </div>
+    <br />
+    <br />
+    <br />
     
 <?php
  

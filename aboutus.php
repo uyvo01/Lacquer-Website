@@ -3,19 +3,19 @@
     include "header.php"; 
 ?>
 
-    <div class="hb30" style="width:100%;text-align:center;margin-top:20px">About us</div>
+    <div class="hb30" style="width:100%;text-align:center;margin-top:20px"><?php echo $Aboutus;?></div>
     <div class="container_horizon" style="width:70%; background:lightgray; margin-top:20px; margin-left:auto;margin-right:auto;">
         
         <div class="container_vertical" style="width:55%">
-            <div class="h20" style="margin-bottom:10px;"><strong>Name:</strong> Uy Vo</div>
-            <div class="h20" style="margin-bottom:10px;"><strong>Email:</strong> uyvo@csu.fullerton.edu</div>
-            <div class="h20" style="margin-bottom:10px;"><strong>College Level:</strong> senior student at California State University Fullerton.</div>
-            <div class="h20" style="margin-bottom:10px;"><strong>Major: </strong>Computer Science</div>
-            <div class="h20" style="margin-bottom:10px;"><strong>Department: </strong>ECS</div>
-            <div class="h20" style="margin-bottom:10px;"><strong>College: </strong>CSUF</div>
-            <div class="h20" style="margin-bottom:10px;"><strong>Personal background: </strong> Dedicated and passionate senior student working toward a BS on May 2024 in computer science at the California State University of Fullerton.</div>
-            <div class="h20" style="margin-bottom:10px;"><strong>Hobbies and favorite food or books:</strong> watching movie, playing tennis, reading book. The most favorite book is The Journey to the East by Hermann Hesse and Hilda Hesse, Herman; Rosner.</div>
-            <div class="h20" style="margin-bottom:10px;"><strong>Research Interest:</strong> AI and Business</div>
+            <div class="h20" style="margin-bottom:10px;"><strong><?php echo $Name?>:</strong> Uy Vo</div>
+            <div class="h20" style="margin-bottom:10px;"><strong><?php echo $Email?>:</strong> uyvo@csu.fullerton.edu</div>
+            <div class="h20" style="margin-bottom:10px;"><strong><?php echo $CollegeLevel?>:</strong> senior student at California State University Fullerton.</div>
+            <div class="h20" style="margin-bottom:10px;"><strong><?php echo $Major?>: </strong>Computer Science</div>
+            <div class="h20" style="margin-bottom:10px;"><strong><?php echo $Department?>: </strong>ECS</div>
+            <div class="h20" style="margin-bottom:10px;"><strong><?php echo $College?>College: </strong>CSUF</div>
+            <div class="h20" style="margin-bottom:10px;"><strong><?php echo $Personalbackground?>: </strong> Dedicated and passionate senior student working toward a BS on May 2024 in computer science at the California State University of Fullerton.</div>
+            <div class="h20" style="margin-bottom:10px;"><strong><?php echo $Hobbies?>:</strong> watching movie, playing tennis, reading book. The most favorite book is The Journey to the East by Hermann Hesse and Hilda Hesse, Herman; Rosner.</div>
+            <div class="h20" style="margin-bottom:10px;"><strong><?php echo $Research?>:</strong> AI and Business</div>
             
         </div>
         <div class="slideshow-container" style="width:40%;">

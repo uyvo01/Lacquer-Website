@@ -1,13 +1,16 @@
 
 <?php
-    if( empty(session_id()) && !headers_sent()){
+    if( empty(session_id())){
         session_start();
+
+        $_SESSION['email']="";
+        $_SESSION['member_name']="";
+        $_SESSION['member_id']="";
+        $_SESSION['usertype']="";
+        $_SESSION['language']="en";
     }
-    $_SESSION['email']="";
-    $_SESSION['member_name']="";
-    $_SESSION['member_id']="";
-    $_SESSION['usertype']="";
-    $menu="home";
+    echo session_id();
+
     header("Location: home.php");
 ?>
 

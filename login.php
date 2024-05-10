@@ -1,8 +1,5 @@
 <?php
-
-if( empty(session_id()) && !headers_sent()){
-    session_start();
-}
+session_start();
 include "ConnectionData.txt";
 $conn=mysqli_connect($servername,$username,$password);
 if (!$conn)

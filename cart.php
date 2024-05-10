@@ -47,7 +47,7 @@ if ($func=='checkout'){
     
         <form class='normal' action='cart.php?func=checkout' method = 'post' name = 'frmCart' id ='frmCart'  enctype="multipart/form-data">
             <div class = "container" style="width: 95%;">
-                <div class="container" style="width: 75%;  animation: fadeInAnimation ease 2s; background-color: white; padding-left:20px;margin-left:auto;margin-right:auto;">
+                <div class="container" style="width: 65%;  animation: fadeInAnimation ease 2s; background-color: white; padding-left:20px;margin-left:auto;margin-right:auto; margin-top:0px;">
                     <div class = 'hb25' style="width: 100%; background-color: white; margin-left:auto;margin-right:auto; text-align:left; padding:10px; ">Shopping Cart
                         <span style='float:right; margin-right:20px; margin-bottom:5px;font-size:20px'>Price</span>
                     </div>
@@ -115,6 +115,9 @@ if ($func=='checkout'){
                             }
                     ?>
                     <br />
+                    <br />
+                    <br />
+                    <br />
                     </div>
                 
                 <div class='container' style = 'width: 20%; margin-top:0px; padding-bottom:20px'>
@@ -129,10 +132,10 @@ if ($func=='checkout'){
                     
                     <?php     
                         $sql="  select p.product_no, p.product_name, p.product_artist, p.product_size_height, round(p.product_size_height/2.54,1) as size_height_inches
-                                , p.product_size_width, round(p.product_size_width/2.54,1) as size_width_inches, p.product_material
-                                , p.product_price, p.product_img, p.product_status, p.product_delivery, p.product_description, p.member_id, c.product_quantity
-                                from products p, carts c 
-                                where p.product_no = c.product_no and c.member_id = '".$_SESSION['member_id']."' order by c.product_no limit 4";
+                                    , p.product_size_width, round(p.product_size_width/2.54,1) as size_width_inches, p.product_material
+                                    , p.product_price, p.product_img, p.product_status, p.product_delivery, p.product_description, p.member_id
+                                from products p
+                                where p.product_no in (select product_no from orders_detail group by product_no) limit 3";
                         $result=mysqli_query($conn,$sql);
                         $count=0;
                         $subtotal=0;
@@ -140,9 +143,12 @@ if ($func=='checkout'){
                         ?>
                             <div class="container_horizon" style="width: 100%; padding-left:5px;margin-left:auto;margin-right:auto;">
                                 
-                                <img src='images/<?php echo $row['product_img']?>' style="width:45%; height:auto;margin-left:5px;margin-right:auto;">
-
-                                <div class="container_vertical" style = 'width:50%;'>
+                                <div class="container_horizon" style="width: 50%; padding-bottom:5px;margin-left:auto;margin-right:auto;">
+                                    <a class='icon' href='shopping.php?func=view&product_no=<?php echo $row['product_no']; ?>'>
+                                        <img src='images/<?php echo $row['product_img']?>' style="width:100%; height:auto;margin-left:5px;margin-right:auto;">
+                                    </a>
+                                </div>
+                                <div class="container_vertical" style = 'width:45%;background:white' >
                                     <div class = 'hb15' style="font-weight:bold;text-align:left; margin-bottom:0px"><?php echo $row['product_name']; ?></div>
                                     <br />
                                     <table style="width:100%;border:0px; margin-top: 0px; margin-left: auto; margin-right: auto; align-self: flex-start;">
@@ -224,7 +230,7 @@ if ($func=='checkout'){
     <br />
     <form class='normal' action='order.php?func=order' method = 'post' enctype="multipart/form-data">
         <div class = "container" style="width: 95%; ">
-            <div class="container" style="width: 75%;  animation: fadeInAnimation ease 2s; background-color: white; padding-left:20px;margin-left:auto;margin-right:auto;margin-top:0px;">
+            <div class="container" style="width: 65%;  animation: fadeInAnimation ease 2s; background-color: white; padding-left:20px;margin-left:auto;margin-right:auto;margin-top:0px;">
                 <div class = 'h25' style="width: 100%; text-align: center; padding:10px; margin-left:auto;margin-right:auto; ">Checkout (<?php echo $items; ?> items)
                 </div>
                 <div class="line-1" style="width:100%; padding-right:20px"></div>
@@ -322,41 +328,43 @@ if ($func=='checkout'){
                 </div>
                 <br />
                 <br />
-                <div class="hb20" style = "width: 100%; margin-top:0px; padding:10px; background:white" >Explore frequently repurchased items</div>
+                <div class='container' style = 'width: 100%; margin-top:0px; padding-bottom:20px;background:white'>
+                    <div class="hb20" style = "width: 100%; margin-top:0px; padding:10px; background:white" >Explore frequently repurchased items</div>
+
                 <?php     
                     $sql="  select p.product_no, p.product_name, p.product_artist, p.product_size_height, round(p.product_size_height/2.54,1) as size_height_inches
                             , p.product_size_width, round(p.product_size_width/2.54,1) as size_width_inches, p.product_material
-                            , p.product_price, p.product_img, p.product_status, p.product_delivery, p.product_description, p.member_id, c.product_quantity
-                            from products p, carts c 
-                            where p.product_no = c.product_no and c.member_id = '".$_SESSION['member_id']."' order by c.product_no limit 4";
+                            , p.product_price, p.product_img, p.product_status, p.product_delivery, p.product_description, p.member_id
+                            from products p
+                            where p.product_no in (select product_no from orders_detail group by product_no) limit 3";
                     $result=mysqli_query($conn,$sql);
                     $count=0;
                     $subtotal=0;
                     while($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
                     ?>
-                        <div class="container_horizon" style="width: 100%; padding-left:5px;margin-left:auto;margin-right:auto;">
-                            
-                            <img src='images/<?php echo $row['product_img']?>' style="width:45%; height:auto;margin-left:5px;margin-right:auto;">
-
-                            <div class="container_vertical" style = 'width:50%;'>
-                                <div class = 'hb15' style="font-weight:bold;text-align:left; margin-bottom:0px"><?php echo $row['product_name']; ?></div>
-                                <br />
-                                <table style="width:100%;border:0px; margin-top: 0px; margin-left: auto; margin-right: auto; align-self: flex-start;">
-                                    <tr>
-                                        <td style="border:0px; margin-bottom: 0px;"><div class="hb12">ARTIRST:</div></td>
-                                        <td style="border:0px;"><div class="hb12"><?php echo $row['product_artist']?></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:0px;"><div class="hb12">MATERIAL:</div></td>
-                                        <td style="border:0px;"><div class="hb12"><?php echo $row['product_material']?></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="border:0px;"><div class="hb12">$<?php echo number_format($row["product_price"]);?></div></td>
-                                    </tr>
-                                </table>
-                                
-                                <div class="line-1"></div>
-                            </div>
+                        
+                        <div class="container_horizon" style="width: 50%; padding-bottom:5px;margin-left:auto;margin-right:auto;">
+                            <a class='icon' href='shopping.php?func=view&product_no=<?php echo $row['product_no']; ?>'>
+                                <img src='images/<?php echo $row['product_img']?>' style="width:100%; height:auto;margin-left:5px;margin-right:auto;">
+                            </a>
+                        </div>
+                        <div class="container_vertical" style = 'width:45%;background:white' >
+                            <div class = 'hb15' style="font-weight:bold;text-align:left; margin-bottom:0px"><?php echo $row['product_name']; ?></div>
+                            <br />
+                            <table style="width:100%;border:0px; margin-top: 0px; margin-left: auto; margin-right: auto; align-self: flex-start;">
+                                <tr>
+                                    <td style="border:0px; margin-bottom: 0px;"><div class="hb12">ARTIRST:</div></td>
+                                    <td style="border:0px;"><div class="hb12"><?php echo $row['product_artist']?></div></td>
+                                </tr>
+                                <tr>
+                                    <td style="border:0px;"><div class="hb12">MATERIAL:</div></td>
+                                    <td style="border:0px;"><div class="hb12"><?php echo $row['product_material']?></div></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="border:0px;"><div class="hb12">$<?php echo number_format($row["product_price"]);?></div></td>
+                                </tr>
+                            </table>
+                            <div class="line-1"></div>
                         </div>
                         <?php
                     }

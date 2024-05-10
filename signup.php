@@ -38,12 +38,11 @@ function change_type(value) {
 }
 </script> 
 <hr>
-
+<?php if (isset($_GET['error'])) { ?>
+    <div class="hb20" style="text-align: center; margin-bottom:25px;"> <?php echo $_GET['error']; ?> </p>
+<?php } ?>
 <form action='addmember.php' method = 'post' onsubmit='return verifyPassword()'>
 <h1>SIGN UP</h1>
-<?php if (isset($_GET['error'])) { ?>
-    <p class = "error"> <?php echo $_GET['error']; ?> </p>
-<?php } ?>
 <table style='width:600px'>
     <tr>
         <td style='text-align:right'><label>First Name*</label></td>
@@ -55,7 +54,7 @@ function change_type(value) {
         <td style='text-align:right'><label>Birthday</label></td>
         <td style='text-align:left'><input type='date' style='height:25px;width:146px;' required='required' class='textbox' max='2023-01-01' id='birth_day' name='birth_day' value=''></td>
         <td style='text-align:right'><label>Primary Phone*</label></td>
-        <td style='text-align:left'><input type='text' class='textbox' id='phone_no' name='phone_no' value=''></td>
+        <td style='text-align:left'><input type='text' required='required' class='textbox' id='phone_no' name='phone_no' value=''></td>
     </tr>
     
     <tr>
@@ -95,12 +94,12 @@ function change_type(value) {
         </tr>
     <tr>
         <td style='text-align:right'><label>Email*</label></font></td>
-        <td style='text-align:left'><input type='email' required='required' class='textbox' id='username' name='username' value=''></td>
+        <td style='text-align:left'><input type='email' required='required' class='textbox' id='username' name='username' placeholder="example@gmail.com" value=''></td>
         <td></td><td></td>
     </tr>
     <tr>
         <td style='text-align:right'><label>Password*</label></td>
-        <td style='text-align:left'><input type='password' required='required' minlength='6' class='textbox' id='password' name='password' value=''></td>
+        <td style='text-align:left'><input type='password' required='required' minlength='6' class='textbox' id='password' name='password' placeholder="at least 6 characters" value=''></td>
         <td></td><td></td>
     </tr>
     <tr>    
